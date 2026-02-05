@@ -108,8 +108,27 @@ scrollTopBtn.addEventListener('click', () => {
 // ================================
 const contactForm = document.getElementById('contactForm');
 
-contactForm.addEventListener('submit', function(e) {
+// Initialize EmailJS (you'll need to set up your EmailJS account)
+// Visit https://www.emailjs.com/ to get your keys
+const EMAILJS_PUBLIC_KEY = 'VNaptzurXMluqfUZq'; // Your actual public key
+const EMAILJS_SERVICE_ID = 'service_8dc78q5'; // Your actual service ID
+const EMAILJS_TEMPLATE_ID = 'template_fptvu1d'; // Your actual Contact Us template ID
+
+// Initialize EmailJS when the page loads
+document.addEventListener('DOMContentLoaded', function() {
+    if (typeof emailjs !== 'undefined') {
+        emailjs.init(EMAILJS_PUBLIC_KEY);
+    }
+});
+
+contactForm.addEventListener('submit', async function(e) {
     e.preventDefault();
+    
+    // Show loading state
+    const submitBtn = this.querySelector('button[type="submit"]');
+    const originalText = submitBtn.textContent;
+    submitBtn.textContent = 'Sending...';
+    submitBtn.disabled = true;
     
     // Get form data
     const formData = new FormData(this);
@@ -118,9 +137,92 @@ contactForm.addEventListener('submit', function(e) {
         data[key] = value;
     });
     
-    // Create WhatsApp message
-    const message = `
-*New Callout Request*
+    // Validate form
+    let isValid = true;
+    const inputs = this.querySelectorAll('input[required], select[required], textarea[required]');
+    inputs.forEach(input => {
+        if (!validateField(input)) {
+            isValid = false;
+        }
+    });
+    
+    if (!isValid) {
+        submitBtn.textContent = originalText;
+        submitBtn.disabled = false;
+        showNotification('Please fix the errors in the form', 'error');
+        return;
+    }
+    
+    try {
+        // Send via EmailJS
+        if (typeof emailjs !== 'undefined') {
+            await sendEmailJS(data);
+        }
+        
+        // Option 2: Send to your backend API (if you have one)
+        // await sendToBackend(data);
+        
+        // Show success message
+        showNotification('Request sent successfully! We will contact you shortly.', 'success');
+        
+        // Reset form
+        this.reset();
+        
+    } catch (error) {
+        console.error('Error sending form:', error);
+        showNotification('There was an error sending your request. Please try again or contact us directly.', 'error');
+    } finally {
+        // Reset button
+        submitBtn.textContent = originalText;
+        submitBtn.disabled = false;
+    }
+});
+
+// EmailJS integration
+async function sendEmailJS(data) {
+    if (typeof emailjs === 'undefined') {
+        throw new Error('EmailJS not loaded');
+    }
+    
+    const templateParams = {
+        from_name: data.name,
+        from_email: data.email,
+        phone: data.phone,
+        address: data.address,
+        appliance: data.appliance,
+        message: data.message,
+        to_email: 'electrohomeintl@gmail.com' // Your email
+    };
+    
+    const response = await emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, templateParams);
+    
+    if (response.status !== 200) {
+        throw new Error('EmailJS failed');
+    }
+    
+    return response;
+}
+
+// Backend API integration (for when you set up your backend)
+async function sendToBackend(data) {
+    const response = await fetch('/api/contact', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data)
+    });
+    
+    if (!response.ok) {
+        throw new Error('Backend API failed');
+    }
+    
+    return response.json();
+}
+
+// WhatsApp message creation (always works as fallback)
+function createWhatsAppMessage(data) {
+    const message = `*New Callout Request*
 
 Name: ${data.name}
 Phone: ${data.phone}
@@ -130,26 +232,24 @@ Appliance: ${data.appliance}
 
 Issue Description:
 ${data.message}
-    `.trim();
+
+Sent from: ElectroHome International Website
+Time: ${new Date().toLocaleString()}`.trim();
     
     // Encode message for URL
     const encodedMessage = encodeURIComponent(message);
     
-    // WhatsApp number (remove spaces and special characters)
+    // WhatsApp number
     const whatsappNumber = '27818981775';
     
     // Create WhatsApp URL
     const whatsappURL = `https://wa.me/${whatsappNumber}?text=${encodedMessage}`;
     
-    // Open WhatsApp in new tab
-    window.open(whatsappURL, '_blank');
-    
-    // Show success message
-    showNotification('Request sent! We will contact you shortly.', 'success');
-    
-    // Reset form
-    this.reset();
-});
+    // Open WhatsApp in new tab (small delay to ensure notification shows first)
+    setTimeout(() => {
+        window.open(whatsappURL, '_blank');
+    }, 1000);
+}
 
 // ================================
 // Notification System

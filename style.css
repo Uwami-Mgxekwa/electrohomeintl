@@ -651,9 +651,21 @@ button {
     border-color: var(--primary-blue);
 }
 
+.form-group input.error,
+.form-group select.error,
+.form-group textarea.error {
+    border-color: #CC0000;
+    background-color: #FFF5F5;
+}
+
 .form-group textarea {
     resize: vertical;
     min-height: 120px;
+}
+
+.btn:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
 }
 
 /* ================================
