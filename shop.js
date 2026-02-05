@@ -10,7 +10,7 @@ const products = [
         condition: "new",
         price: 8999,
         description: "8kg capacity, energy efficient, digital display",
-        image: "assets/washing-machine-1.jpg"
+        image: "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=400&h=300&fit=crop&auto=format"
     },
     {
         id: 2,
@@ -19,7 +19,7 @@ const products = [
         condition: "second-hand",
         price: 4500,
         description: "12kg capacity, excellent condition, fully functional",
-        image: "assets/washing-machine-2.jpg"
+        image: "https://images.unsplash.com/photo-1610557892470-55d9e80c0bce?w=400&h=300&fit=crop&auto=format"
     },
     {
         id: 3,
@@ -28,7 +28,7 @@ const products = [
         condition: "second-hand",
         price: 2800,
         description: "6kg capacity, reliable, great for apartments",
-        image: "assets/washing-machine-3.jpg"
+        image: "https://images.unsplash.com/photo-1604335399105-a0c585fd81a1?w=400&h=300&fit=crop&auto=format"
     },
     {
         id: 4,
@@ -37,7 +37,7 @@ const products = [
         condition: "new",
         price: 12500,
         description: "9kg capacity, smart features, premium quality",
-        image: "assets/washing-machine-4.jpg"
+        image: "https://images.unsplash.com/photo-1571068316344-75bc76f77890?w=400&h=300&fit=crop&auto=format"
     },
 
     // Refrigerators
@@ -48,7 +48,7 @@ const products = [
         condition: "new",
         price: 6999,
         description: "450L capacity, frost-free, energy saving",
-        image: "assets/fridge-1.jpg"
+        image: "https://images.unsplash.com/photo-1571175443880-49e1d25b2bc5?w=400&h=300&fit=crop&auto=format"
     },
     {
         id: 6,
@@ -57,7 +57,7 @@ const products = [
         condition: "new",
         price: 18999,
         description: "600L capacity, water dispenser, ice maker",
-        image: "assets/fridge-2.jpg"
+        image: "https://images.unsplash.com/photo-1586201375761-83865001e31c?w=400&h=300&fit=crop&auto=format"
     },
     {
         id: 7,
@@ -66,7 +66,7 @@ const products = [
         condition: "second-hand",
         price: 3500,
         description: "250L capacity, good working condition",
-        image: "assets/fridge-3.jpg"
+        image: "https://images.unsplash.com/photo-1571175443880-49e1d25b2bc5?w=400&h=300&fit=crop&auto=format&sat=-20"
     },
     {
         id: 8,
@@ -75,7 +75,7 @@ const products = [
         condition: "second-hand",
         price: 11500,
         description: "520L capacity, excellent condition, modern design",
-        image: "assets/fridge-4.jpg"
+        image: "https://images.unsplash.com/photo-1571068316344-75bc76f77890?w=400&h=300&fit=crop&auto=format&hue=180"
     },
 
     // Ovens & Stoves
@@ -86,7 +86,7 @@ const products = [
         condition: "new",
         price: 5499,
         description: "Electric, built-in oven, grill function",
-        image: "assets/stove-1.jpg"
+        image: "https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=400&h=300&fit=crop&auto=format"
     },
     {
         id: 10,
@@ -95,7 +95,7 @@ const products = [
         condition: "new",
         price: 9999,
         description: "5 burners, safety features, premium finish",
-        image: "assets/stove-2.jpg"
+        image: "https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=400&h=300&fit=crop&auto=format&sat=20"
     },
     {
         id: 11,
@@ -104,7 +104,7 @@ const products = [
         condition: "second-hand",
         price: 1800,
         description: "Compact, portable, perfect for small kitchens",
-        image: "assets/stove-3.jpg"
+        image: "https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=400&h=300&fit=crop&auto=format&brightness=-10"
     },
     {
         id: 12,
@@ -113,7 +113,7 @@ const products = [
         condition: "second-hand",
         price: 7500,
         description: "Multifunction, fan-forced, excellent condition",
-        image: "assets/stove-4.jpg"
+        image: "https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=400&h=300&fit=crop&auto=format&hue=30"
     },
 
     // Dishwashers
@@ -124,7 +124,7 @@ const products = [
         condition: "new",
         price: 11999,
         description: "14 place settings, quiet operation, eco mode",
-        image: "assets/dishwasher-1.jpg"
+        image: "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=400&h=300&fit=crop&auto=format&hue=60"
     },
     {
         id: 14,
@@ -133,7 +133,7 @@ const products = [
         condition: "second-hand",
         price: 5500,
         description: "12 place settings, multiple wash cycles",
-        image: "assets/dishwasher-2.jpg"
+        image: "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=400&h=300&fit=crop&auto=format&hue=120"
     },
     {
         id: 15,
@@ -142,7 +142,7 @@ const products = [
         condition: "new",
         price: 7999,
         description: "8 place settings, space-saving design",
-        image: "assets/dishwasher-3.jpg"
+        image: "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=400&h=300&fit=crop&auto=format&brightness=10"
     },
 
     // Microwaves
@@ -153,7 +153,7 @@ const products = [
         condition: "new",
         price: 2499,
         description: "28L capacity, grill function, digital controls",
-        image: "assets/microwave-1.jpg"
+        image: "https://images.unsplash.com/photo-1574269909862-7e1d70bb8078?w=400&h=300&fit=crop&auto=format"
     },
     {
         id: 17,
@@ -162,7 +162,7 @@ const products = [
         condition: "second-hand",
         price: 1200,
         description: "23L capacity, excellent working order",
-        image: "assets/microwave-2.jpg"
+        image: "https://images.unsplash.com/photo-1574269909862-7e1d70bb8078?w=400&h=300&fit=crop&auto=format&sat=-10"
     },
     {
         id: 18,
@@ -171,7 +171,7 @@ const products = [
         condition: "new",
         price: 1899,
         description: "20L capacity, compact, easy to use",
-        image: "assets/microwave-3.jpg"
+        image: "https://images.unsplash.com/photo-1574269909862-7e1d70bb8078?w=400&h=300&fit=crop&auto=format&hue=30"
     },
     {
         id: 19,
@@ -180,7 +180,7 @@ const products = [
         condition: "new",
         price: 4999,
         description: "32L capacity, convection + grill, premium",
-        image: "assets/microwave-4.jpg"
+        image: "https://images.unsplash.com/photo-1574269909862-7e1d70bb8078?w=400&h=300&fit=crop&auto=format&brightness=15"
     },
 
     // Small Appliances
@@ -191,7 +191,7 @@ const products = [
         condition: "new",
         price: 399,
         description: "1.7L, stainless steel, rapid boil",
-        image: "assets/kettle-1.jpg"
+        image: "https://images.unsplash.com/photo-1544787219-7f47ccb76574?w=400&h=300&fit=crop&auto=format"
     },
     {
         id: 21,
@@ -200,7 +200,7 @@ const products = [
         condition: "new",
         price: 599,
         description: "2-slice, variable browning, modern design",
-        image: "assets/toaster-1.jpg"
+        image: "https://images.unsplash.com/photo-1506368249639-73a05d6f6488?w=400&h=300&fit=crop&auto=format"
     },
     {
         id: 22,
@@ -209,7 +209,7 @@ const products = [
         condition: "second-hand",
         price: 450,
         description: "1.5L jug, multiple speeds, good condition",
-        image: "assets/blender-1.jpg"
+        image: "https://images.unsplash.com/photo-1570197788417-0e82375c9371?w=400&h=300&fit=crop&auto=format"
     },
     {
         id: 23,
@@ -218,7 +218,7 @@ const products = [
         condition: "new",
         price: 2299,
         description: "4.2L capacity, healthy cooking, timer function",
-        image: "assets/airfryer-1.jpg"
+        image: "https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=400&h=300&fit=crop&auto=format&hue=200"
     },
     {
         id: 24,
@@ -227,7 +227,7 @@ const products = [
         condition: "second-hand",
         price: 250,
         description: "Steam iron, ceramic soleplate, works perfectly",
-        image: "assets/iron-1.jpg"
+        image: "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=400&h=300&fit=crop&auto=format&hue=300"
     },
     {
         id: 25,
@@ -236,7 +236,7 @@ const products = [
         condition: "new",
         price: 3499,
         description: "Multiple attachments, powerful motor",
-        image: "assets/processor-1.jpg"
+        image: "https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=400&h=300&fit=crop&auto=format&hue=270"
     },
     {
         id: 26,
@@ -245,7 +245,7 @@ const products = [
         condition: "second-hand",
         price: 1100,
         description: "12-cup capacity, programmable, excellent condition",
-        image: "assets/coffee-1.jpg"
+        image: "https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=400&h=300&fit=crop&auto=format"
     },
     {
         id: 27,
@@ -254,7 +254,7 @@ const products = [
         condition: "new",
         price: 899,
         description: "5L capacity, 3 heat settings, convenient",
-        image: "assets/slowcooker-1.jpg"
+        image: "https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=400&h=300&fit=crop&auto=format&hue=90"
     }
 ];
 
