@@ -420,19 +420,69 @@ function showFieldError(field, message) {
 }
 
 // ================================
-// Performance: Lazy Loading Images
+// Performance: Enhanced Image Loading
 // ================================
-if ('loading' in HTMLImageElement.prototype) {
-    const images = document.querySelectorAll('img[loading="lazy"]');
-    images.forEach(img => {
-        img.src = img.dataset.src || img.src;
+document.addEventListener('DOMContentLoaded', () => {
+    // Preload critical images
+    const criticalImages = ['top.jpg'];
+    criticalImages.forEach(src => {
+        const link = document.createElement('link');
+        link.rel = 'preload';
+        link.as = 'image';
+        link.href = src;
+        document.head.appendChild(link);
     });
-} else {
-    // Fallback for browsers that don't support lazy loading
-    const script = document.createElement('script');
-    script.src = 'https://cdnjs.cloudflare.com/ajax/libs/lazysizes/5.3.2/lazysizes.min.js';
-    document.body.appendChild(script);
-}
+    
+    // Enhanced lazy loading with intersection observer
+    if ('IntersectionObserver' in window) {
+        const imageObserver = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const img = entry.target;
+                    img.classList.add('loaded');
+                    observer.unobserve(img);
+                }
+            });
+        }, {
+            rootMargin: '50px 0px',
+            threshold: 0.01
+        });
+        
+        // Observe all lazy images
+        document.querySelectorAll('img[loading="lazy"]').forEach(img => {
+            imageObserver.observe(img);
+        });
+    } else {
+        // Fallback for browsers without IntersectionObserver
+        document.querySelectorAll('img[loading="lazy"]').forEach(img => {
+            img.classList.add('loaded');
+        });
+    }
+    
+    // Mark eager images as loaded immediately
+    document.querySelectorAll('img[loading="eager"]').forEach(img => {
+        img.classList.add('loaded');
+    });
+});
+
+// ================================
+// Performance: Resource Hints
+// ================================
+window.addEventListener('load', () => {
+    // Prefetch next page resources
+    const prefetchLinks = [
+        'shop.html',
+        'shop.css',
+        'shop.js'
+    ];
+    
+    prefetchLinks.forEach(href => {
+        const link = document.createElement('link');
+        link.rel = 'prefetch';
+        link.href = href;
+        document.head.appendChild(link);
+    });
+});
 
 // ================================
 // External Links - Open in New Tab
@@ -476,8 +526,13 @@ window.addEventListener('load', () => {
 // ================================
 if ('serviceWorker' in navigator) {
     window.addEventListener('load', () => {
-        // Service worker can be added here for PWA functionality
-        // navigator.serviceWorker.register('/sw.js');
+        navigator.serviceWorker.register('/sw.js')
+            .then(registration => {
+                console.log('SW registered: ', registration);
+            })
+            .catch(registrationError => {
+                console.log('SW registration failed: ', registrationError);
+            });
     });
 }
 

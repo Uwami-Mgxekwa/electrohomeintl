@@ -293,6 +293,9 @@ document.addEventListener('DOMContentLoaded', () => {
     renderProducts();
     updateCart();
     
+    // Enhanced image loading for product images
+    setupImageLoading();
+    
     // Event Listeners
     cartIcon.addEventListener('click', openCart);
     cartClose.addEventListener('click', closeCart);
@@ -327,6 +330,43 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 // ================================
+// Enhanced Image Loading
+// ================================
+function setupImageLoading() {
+    if ('IntersectionObserver' in window) {
+        const imageObserver = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const img = entry.target;
+                    img.classList.add('loaded');
+                    observer.unobserve(img);
+                }
+            });
+        }, {
+            rootMargin: '100px 0px',
+            threshold: 0.01
+        });
+        
+        // Re-observe images when products are rendered
+        const observeImages = () => {
+            document.querySelectorAll('.product-image[loading="lazy"]').forEach(img => {
+                imageObserver.observe(img);
+            });
+        };
+        
+        // Initial observation
+        observeImages();
+        
+        // Re-observe after filtering
+        const originalRenderProducts = renderProducts;
+        renderProducts = function() {
+            originalRenderProducts.call(this);
+            setTimeout(observeImages, 100);
+        };
+    }
+}
+
+// ================================
 // Render Products
 // ================================
 function renderProducts() {
@@ -342,7 +382,7 @@ function renderProducts() {
     productsGrid.innerHTML = filteredProducts.map(product => `
         <div class="product-card" data-id="${product.id}">
             <div class="product-image-wrapper">
-                <img src="${product.image}" alt="${product.name}" class="product-image" loading="lazy">
+                <img src="${product.image}" alt="${product.name}" class="product-image" loading="lazy" decoding="async" width="400" height="300">
                 <span class="product-badge ${product.condition === 'new' ? 'badge-new' : 'badge-second-hand'}">
                     ${product.condition === 'new' ? 'New' : 'Second-Hand'}
                 </span>

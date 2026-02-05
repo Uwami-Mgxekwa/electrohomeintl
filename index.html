@@ -39,6 +39,15 @@
     <!-- Web App Manifest -->
     <link rel="manifest" href="manifest.json">
     
+    <!-- Preload Critical Resources -->
+    <link rel="preload" href="style.css" as="style">
+    <link rel="preload" href="top.jpg" as="image">
+    <link rel="preconnect" href="https://images.unsplash.com">
+    <link rel="dns-prefetch" href="https://images.unsplash.com">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="dns-prefetch" href="https://cdn.jsdelivr.net">
+    
     <link rel="stylesheet" href="style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -109,7 +118,7 @@
                     </div>
                 </div>
                 <div class="hero-image">
-                    <img src="top.jpg" alt="Professional appliance repair technician" loading="eager">
+                    <img src="top.jpg" alt="Professional appliance repair technician" loading="eager" fetchpriority="high" decoding="async" width="600" height="400">
                 </div>
             </div>
         </div>
@@ -264,7 +273,7 @@
         <div class="container">
             <div class="about-content">
                 <div class="about-image">
-                    <img src="under.jpg" alt="ElectroHome International workshop" loading="lazy">
+                    <img src="under.jpg" alt="ElectroHome International workshop" loading="lazy" decoding="async" width="600" height="400">
                 </div>
                 <div class="about-text">
                     <h2 class="section-title">About ElectroHome International</h2>

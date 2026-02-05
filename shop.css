@@ -43,6 +43,19 @@ img {
     max-width: 100%;
     height: auto;
     display: block;
+    content-visibility: auto;
+    contain-intrinsic-size: 400px 300px;
+}
+
+/* Image loading optimization */
+img[loading="lazy"] {
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+
+img[loading="lazy"].loaded,
+img[loading="eager"] {
+    opacity: 1;
 }
 
 a {
